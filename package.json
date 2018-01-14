@@ -1,6 +1,6 @@
 {
   "name": "filthy-clean",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "Filter and sanitize HTML input",
   "author": "Claudio Semeraro",
 	"license": "MIT",
