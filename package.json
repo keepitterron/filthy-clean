@@ -16,7 +16,8 @@
 	"scripts": {
     "build": "microbundle",
 		"dev": "microbundle watch",
-		"test": "jest"
+		"test": "jest",
+		"pre-release": "npm t && git commit -am $npm_package_version && git tag $npm_package_version && git push && git push --tags"
 	},
   "keywords": [
     "filthy",
