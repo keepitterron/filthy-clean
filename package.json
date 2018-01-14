@@ -1,23 +1,18 @@
 {
   "name": "filthy-clean",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Filter and sanitize HTML input",
   "author": "Claudio Semeraro",
 	"license": "MIT",
-  "source": "src/filthy.js",
-  "module": "dist/filthy.es.js",
-  "main": "dist/filthy.js",
-  "umd:main": "dist/filthy.umd.js",
+  "main": "src/filthy.js",
   "devDependencies": {
     "jest": "^22.0.6",
-		"jsdom": "^11.5.1",
-		"microbundle": "^0.3.1"
+		"jsdom": "^11.5.1"
   },
 	"scripts": {
-    "build": "microbundle",
-		"dev": "microbundle watch",
 		"test": "jest",
-		"pre-release": "npm t && git commit -am $npm_package_version && git tag $npm_package_version && git push && git push --tags"
+    "pre-release": "npm t && git commit -am $npm_package_version && git tag $npm_package_version && git push && git push --tags",
+    "release": "npm run pre-release && npm publish"
 	},
   "keywords": [
     "filthy",

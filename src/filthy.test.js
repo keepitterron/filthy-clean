@@ -1,6 +1,6 @@
-const sanitizeHtml = require("./filthy");
-const jsdom = require("jsdom").JSDOM;
-const { document } = new jsdom("<!DOCTYPE html><p>Hello world</p>").window;
+const sanitizeHtml = require('./filthy');
+const jsdom = require('jsdom').JSDOM;
+const { document } = new jsdom('<!DOCTYPE html><p>Hello world</p>').window;
 
 const filthyString = `
 	<div class="xss" onload="javascript:doEvil();" aria-label="eval('alert('\'boo\)')">
