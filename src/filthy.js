@@ -1,15 +1,15 @@
-const ALLOWED_TAGS = 'div,p,a,br,i,em,strong,b,img';
-const ALLOWED_ATTRS = 'href,title,alt,src,width,height';
+const ALLOWED_TAGS = "div,p,a,br,i,em,strong,b,img";
+const ALLOWED_ATTRS = "href,title,alt,src,width,height";
 
 const createDoc = () => document.implementation.createHTMLDocument();
-const createDiv = (doc) => doc.createElement('div');
+const createDiv = doc => doc.createElement("div");
 
 let doc;
 
 function cleanAttribute(name, content) {
-	if(['href', 'src'].indexOf(name) < 0) return content;
+	if (["href", "src"].indexOf(name) < 0) return content;
 	const urlPattern = /^((http|https|ftp):\/\/)/;
-	if(!urlPattern.test(content)) return '';
+	if (!urlPattern.test(content)) return "";
 	return content;
 }
 
@@ -17,10 +17,13 @@ function cleanNode(originalNode, allowedAttrs) {
 	const nodeName = originalNode.nodeName.toLowerCase();
 	const nodeCopy = doc.createElement(nodeName);
 
-	for(let n = 0; n < originalNode.attributes.length; n++) {
+	for (let n = 0; n < originalNode.attributes.length; n++) {
 		const attrName = originalNode.attributes.item(n).name;
-		if(allowedAttrs.indexOf(attrName) > -1) {
-			const attr = cleanAttribute(attrName, originalNode.getAttribute(attrName))
+		if (allowedAttrs.indexOf(attrName) > -1) {
+			const attr = cleanAttribute(
+				attrName,
+				originalNode.getAttribute(attrName)
+			);
 			nodeCopy.setAttribute(attrName, attr);
 		}
 	}
@@ -30,19 +33,19 @@ function cleanNode(originalNode, allowedAttrs) {
 
 function filter(node, opts = {}) {
 	const nodeName = node.nodeName.toLowerCase();
-	const allowedNodes = opts.allowedNodes || ALLOWED_TAGS.split(',');
-	const allowedAttrs = opts.allowedAttrs || ALLOWED_ATTRS.split(',');
+	const allowedNodes = opts.allowedNodes || ALLOWED_TAGS.split(",");
+	const allowedAttrs = opts.allowedAttrs || ALLOWED_ATTRS.split(",");
 
-	if(nodeName === '#text') return node;
-	if(nodeName === '#comment') return doc.createTextNode('');
-	if(allowedNodes.indexOf(nodeName) < 0) return doc.createTextNode('');
+	if (nodeName === "#text") return node;
+	if (nodeName === "#comment") return doc.createTextNode("");
+	if (allowedNodes.indexOf(nodeName) < 0) return doc.createTextNode("");
 
 	const nodeCopy = cleanNode(node, allowedAttrs);
 
 	while (node.childNodes.length > 0) {
-    const child = node.removeChild(node.childNodes[0]);
-    nodeCopy.appendChild(filter(child, opts));
-  }
+		const child = node.removeChild(node.childNodes[0]);
+		nodeCopy.appendChild(filter(child, opts));
+	}
 
 	return nodeCopy;
 }
