@@ -1,8 +1,7 @@
 {
   "name": "filthy-clean",
-  "version": "0.1.1",
+  "version": "1.0.0",
   "description": "Filter and sanitize HTML input",
-  "author": "Claudio Semeraro",
 	"license": "MIT",
   "main": "src/filthy.js",
   "devDependencies": {
@@ -14,9 +13,18 @@
     "tag-release": "npm t && git commit -am $npm_package_version && git tag $npm_package_version && git push && git push --tags",
     "release": "npm run tag-release && npm publish"
 	},
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/keepitterron/filthy-clean.git"
+  },
+  "author": "Claudio Semeraro",
   "keywords": [
     "filthy",
+    "filter",
+    "DOM",
     "sanitize",
+    "sanitizer",
+    "parser",
     "HTML",
     "xss"
   ]
