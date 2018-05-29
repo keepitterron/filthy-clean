@@ -1,5 +1,5 @@
-const ALLOWED_TAGS = 'div,p,a,br,i,em,strong,b,img';
-const ALLOWED_ATTRS = 'href,title,alt,src,width,height';
+const ALLOWED_TAGS = ['div', 'p', 'a', 'br', 'i', 'em', 'strong', 'b', 'img'];
+const ALLOWED_ATTRS = ['href', 'title', 'alt', 'src', 'width', 'height'];
 
 const createDoc = () => document.implementation.createHTMLDocument();
 const createDiv = doc => doc.createElement('div');
@@ -29,8 +29,8 @@ function cleanNode(originalNode, allowedAttrs) {
 
 function filter(node, opts = {}) {
   const nodeName = node.nodeName.toLowerCase();
-  const allowedNodes = opts.allowedNodes || ALLOWED_TAGS.split(',');
-  const allowedAttrs = opts.allowedAttrs || ALLOWED_ATTRS.split(',');
+  const allowedNodes = opts.allowedNodes || ALLOWED_TAGS;
+  const allowedAttrs = opts.allowedAttrs || ALLOWED_ATTRS;
 
   if (nodeName === '#text') return node;
   if (nodeName === '#comment') return doc.createTextNode('');

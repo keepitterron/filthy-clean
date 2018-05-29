@@ -15,9 +15,9 @@ Instead of running complicated regexps on the html string itself, why not lettin
 ```
 
 ### Options
-`options.allowedNodes` - An array of nodes to  keep (eg: ['div', 'br', 'strong'])  
-`options.allowedAttrs` - An array of attributes to  keep (eg: ['alt', 'href', 'src'])  
+`options.allowedNodes` - An array of nodes to  keep (eg: ['div', 'br', 'strong'])
+`options.allowedAttrs` - An array of attributes to  keep (eg: ['alt', 'href', 'src'])
 
 ### Defaults
-`options.allowedNodes` - 'div,p,a,br,i,em,strong,b,img'  
-`options.allowedAttrs` - 'href,title,alt,src,width,height'  
+`options.allowedNodes` - ['div, 'p', 'a', 'br', 'i', 'em', 'strong', 'b', 'img']
+`options.allowedAttrs` - ['href', 'title', 'alt', 'src', 'width', 'height']
