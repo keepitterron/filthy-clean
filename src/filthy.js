@@ -4,7 +4,7 @@ const ALLOWED_ATTRS = ['href', 'title', 'alt', 'src', 'width', 'height'];
 const createDoc = () => document.implementation.createHTMLDocument();
 const createDiv = doc => doc.createElement('div');
 
-let doc;
+let doc = document;
 
 function cleanAttribute(name, content) {
   if (['href', 'src'].indexOf(name) < 0) return content;
@@ -31,6 +31,8 @@ function filter(node, opts = {}) {
   const nodeName = node.nodeName.toLowerCase();
   const allowedNodes = opts.allowedNodes || ALLOWED_TAGS;
   const allowedAttrs = opts.allowedAttrs || ALLOWED_ATTRS;
+  
+  allowedNodes.push('body');
 
   if (nodeName === '#text') return node;
   if (nodeName === '#comment') return doc.createTextNode('');
@@ -47,10 +49,10 @@ function filter(node, opts = {}) {
 }
 
 function sanitizeHtml(htmlString, opts) {
-  doc = createDoc();
-  const div = createDiv(doc);
-  div.innerHTML = htmlString;
-  return filter(div, opts).innerHTML;
+  const parser = new DOMParser();
+  const doc = parser.parseFromString(htmlString, "text/html");
+
+  return filter(doc.body, opts).innerHTML;
 }
 
 module.exports = sanitizeHtml;
